@@ -20,6 +20,7 @@
 
 #define XXX &none
 #define ___ &trans
+#define VERS A
 
 /* Global defaults */
 
@@ -76,7 +77,7 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS) // Right-hand HRMs.
 &kp ESC       &kp Q  &kp W           &kp E        &kp R             &kp T      &kp Y    &kp U              &kp I        &kp O            &kp P     &none
 &kp TAB       &kp A  &hml LALT S     &hml LCTRL D &hml LSHIFT F     &kp G      &kp H    &hml RSHIFT J      &hml RCTRL K &hml RALT L      &kp SEMI  &kp SQT
 &kp LEFT_GUI  &kp Z  &kp X           &kp C        &kp V             &kp B      &kp N    &kp M              &kp COMMA    &kp DOT          &kp FSLH  &none
-                                     &mo 1        &lt 1 BACKSPACE   &kp RET    &kp RET  &kp SPACE          &mo 2
+                                     &hml 1 VERS  &lt 1 BACKSPACE   &kp RET    &kp RET  &kp SPACE          &hml 2 VERS
             >;
         };
 
