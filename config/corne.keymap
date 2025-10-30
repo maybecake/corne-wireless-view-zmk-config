@@ -9,6 +9,7 @@
 #include <dt-bindings/zmk/keys.h>
 
 #include "zmk-helpers/helpers.h"
+#include "zmk-helpers/key-labels/42.h"  // corne
 
 #define DEF 0
 #define NAV 1
