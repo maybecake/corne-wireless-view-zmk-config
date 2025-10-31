@@ -24,7 +24,7 @@
 
 /* Global defaults */
 
-#define QUICK_TAP_MS 175
+#define QUICK_TAP_MS 215
 
 &sk {
   release-after-ms = <900>;
@@ -74,18 +74,18 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS) // Right-hand HRMs.
             bindings = <
 &kp ESC       &kp Q  &kp W           &kp E        &kp R             &kp T      &kp Y    &kp U              &kp I        &kp O            &kp P     &kp VERS
 &kp TAB       &kp A  &hml LALT S     &hml LCTRL D &hml LSHIFT F     &kp G      &kp H    &hmr RSHIFT J      &hmr RCTRL K &hmr RALT L      &kp SEMI  &kp SQT
-&kp LEFT_GUI  &kp Z  &kp X           &kp C        &kp V             &kp B      &kp N    &kp M              &kp COMMA    &kp DOT          &kp FSLH  &kp B
-                                     &hml 1 VERS  &lt 1 BACKSPACE   &kp RET    &hmr 2 RET  &kp SPACE          &hmr 2 VERS
+&kp LEFT_GUI  &kp Z  &kp X           &kp C        &kp V             &kp B      &kp N    &kp M              &kp COMMA    &kp DOT          &kp FSLH  &kp E 
+                                     &mo 1  &hml 1 BACKSPACE   &kp RET    &hmr 2 RET  &kp SPACE          &mo 2
             >;
         };
 
         lower_layer {
             display-name = "Lower";
             bindings = <
-&kp TAB     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5          &kp N6    &kp N7    &kp N7      &kp N8  &kp N9  &kp BSPC
-&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp LEFT  &kp DOWN  &kp N4      &kp N5  &kp N6  &trans
-&kp LSHFT   &trans        &trans        &trans        &trans        &trans          &trans    &kp N1    &kp N1      &kp N2  &kp N3  &trans
-                                        &trans        &trans        &trans          &trans    &kp N0    &kp PERIOD
+&kp TAB     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5          &trans    &kp N7      &kp N8     &kp N9   &trans   &trans
+&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans    &kp N4      &kp N5     &kp N6   &trans   &trans
+&kp LSHFT   &trans        &trans        &trans        &trans        &trans          &trans    &kp N1      &kp N2     &kp N3   &trans   &trans
+                                        &trans        &trans        &kp UNDERSCORE  &kp N0    &kp PERIOD
             >;
         };
 
@@ -103,7 +103,7 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS) // Right-hand HRMs.
             >;
         };
 
-        extra_1 { status = "reserved"; };
+        extra { status = "reserved"; };
 
         extra_2 { status = "reserved"; };
 
