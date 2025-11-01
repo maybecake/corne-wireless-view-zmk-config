@@ -5,9 +5,7 @@
  */
 
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
-
 #include "zmk-helpers/helper.h"
 #include "zmk-helpers/key-labels/42.h"  // corne
 
@@ -17,7 +15,6 @@
 #define NUM 3
 #define SYS 4
 #define MOUSE 5
-
 #define XXX &none
 #define ___ &trans
 #define VERS D
@@ -27,24 +24,29 @@
 #define QUICK_TAP_MS 215
 
 &sk {
-  release-after-ms = <900>;
-  quick-release;
+    release-after-ms = <900>;
+    quick-release;
 };
 
 &lt {
-  flavor = "balanced";
-  tapping-term-ms = <200>;
-  quick-tap-ms = <QUICK_TAP_MS>;
+    flavor = "balanced";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <QUICK_TAP_MS>;
 };
 
 /* Homerow mods */
 
 #define KEYS_L LT0 LT1 LT2 LT3 LT4 LM0 LM1 LM2 LM3 LM4 LB0 LB1 LB2 LB3 LB4
 #define KEYS_R RT0 RT1 RT2 RT3 RT4 RM0 RM1 RM2 RM3 RM4 RB0 RB1 RB2 RB3 RB4
+
 #ifndef LH2
-  #define THUMBS LH1 LH0 RH0 RH1         // Thumbs on 34 keys.
-#else 
-  #define THUMBS LH2 LH1 LH0 RH0 RH1 RH2 // Thumbs on 36+ keys.
+
+#define THUMBS LH1 LH0 RH0 RH1         // Thumbs on 34 keys.
+
+#else
+
+#define THUMBS LH2 LH1 LH0 RH0 RH1 RH2 // Thumbs on 36+ keys.
+
 #endif
 
 #define MAKE_HRM(NAME, HOLD, TAP, TRIGGER_POS)                                 \
@@ -55,8 +57,8 @@
 
 MAKE_HRM(hml, &kp, &kp, KEYS_R THUMBS) // Left-hand HRMs.
 MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS) // Right-hand HRMs.
-
 // Hack: Make HRM combos tap-only (cf, ZMK issue #544).
+
 #define ZMK_COMBO_8(NAME, TAP, POS, LAYERS, COMBO_MS, IDLE_MS, HOLD, SIDE)     \
   MAKE_HRM(hm_combo_##NAME, &kp, TAP, SIDE THUMBS)                             \
   ZMK_COMBO_6(NAME, &hm_combo_##NAME HOLD 0, POS, LAYERS, COMBO_MS, IDLE_MS)
@@ -68,40 +70,39 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS) // Right-hand HRMs.
         default_layer {
             display-name = "Base";
             bindings = <
-&kp ESC       &kp Q  &kp W         &kp E        &kp R                &kp T      &kp Y          &kp U           &kp I         &kp O        &kp P     &kp BACKSLASH
-&kp TAB       &kp A  &hml LALT S   &hml LCTRL D &hml LSHIFT F        &kp G      &kp H          &hmr RSHIFT J   &hmr RCTRL K  &hmr RALT L  &kp SEMI  &kp SQT
-&kp LEFT_GUI  &kp Z  &kp X         &kp C        &kp V                &kp B      &kp N          &kp M           &kp COMMA     &kp DOT      &kp FSLH  &kp F 
-                                   &kp X   &kp Y  &kp Z    &hmr LMOV RET  &kp SPACE       &kp BACKSPACE
+&kp ESC       &kp Q  &kp W        &kp E         &kp R          &kp T    &kp Y          &kp U          &kp I          &kp O        &kp P     &kp BACKSLASH
+&kp TAB       &kp A  &hml LALT S  &hml LCTRL D  &hml LSHIFT F  &kp G    &kp H          &hmr RSHIFT J  &hmr RCTRL K   &hmr RALT L  &kp SEMI  &kp SQT
+&kp LEFT_GUI  &kp Z  &kp X        &kp C         &kp V          &kp B    &kp N          &kp M          &kp COMMA      &kp DOT      &kp FSLH  &kp F
+                                  &kp X         &kp Y          &kp Z    &hmr LMOV RET  &kp SPACE      &kp BACKSPACE
             >;
         };
 
         symbols_layer {
             display-name = "Sym";
             bindings = <
-&kp TAB     &kp TILDE    &kp AT      &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp EXCLAMATION  &kp STAR   &kp N7      &kp N8     &kp N9   &none          &trans
-&bt BT_CLR  &kp POUND    &kp DOLLAR  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp AMPERSAND    &kp PLUS   &kp N4      &kp N5     &kp N6   &kp EQUAL      &trans
-&kp LSHFT   &kp PERCENT  &kp CARET   &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp PIPE         &kp MINUS  &kp N1      &kp N2     &kp N3   &kp SLASH      &trans
-                                     &trans                &trans                 &kp UNDERSCORE   &kp N0     &kp PERIOD
+&trans  &kp TILDE    &kp AT      &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp EXCLAMATION    &kp STAR   &kp N7      &kp N8  &kp N9  &none      &trans
+&trans  &kp POUND    &kp DOLLAR  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp AMPERSAND      &kp PLUS   &kp N4      &kp N5  &kp N6  &kp EQUAL  &trans
+&trans  &kp PERCENT  &kp CARET   &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp PIPE           &kp MINUS  &kp N1      &kp N2  &kp N3  &kp SLASH  &trans
+                                 &trans                &trans                 &kp UNDERSCORE     &kp N0     &kp PERIOD
             >;
         };
 
-//
-//
-//&kp TAB     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5          &trans    &kp N7      &kp N8     &kp N9   &trans   &trans
-// &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans    &kp N4      &kp N5     &kp N6   &trans   &trans
-// &kp LSHFT   &trans        &trans        &trans        &trans        &trans          &trans    &kp N1      &kp N2     &kp N3   &trans   &trans
-//                                         &trans        &trans        &kp UNDERSCORE  &kp N0    &kp PERIOD
+        //
+        //
+        //&kp TAB     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5          &trans    &kp N7      &kp N8     &kp N9   &trans   &trans
+        // &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans    &kp N4      &kp N5     &kp N6   &trans   &trans
+        // &kp LSHFT   &trans        &trans        &trans        &trans        &trans          &trans    &kp N1      &kp N2     &kp N3   &trans   &trans
+        //                                         &trans        &trans        &kp UNDERSCORE  &kp N0    &kp PERIOD
 
         raise_layer {
             display-name = "Raise";
             bindings = <
-&kp TAB    &kp EXCL  &kp AT  &kp UP  &kp DLLR  &kp PRCNT    &kp CARET  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp BSPC
-&kp LCTRL  &trans    &kp LEFT  &kp DOWN    &kp RIGHT    &trans       &kp MINUS  &kp EQUAL  &kp LBKT         &kp RBKT  &kp BSLH  &kp GRAVE
-&kp LSHFT  &trans    &trans  &trans    &trans    &trans       &kp UNDER  &kp PLUS   &kp LBRC         &kp RBRC  &kp PIPE  &kp TILDE
-                             &kp LGUI  &trans    &kp SPACE    &kp RET    &trans     &kp RALT
+&kp TAB    &kp EXCL  &kp AT    &kp UP    &kp DLLR   &kp PRCNT    &kp CARET  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp BSPC
+&kp LCTRL  &trans    &kp LEFT  &kp DOWN  &kp RIGHT  &trans       &kp MINUS  &kp EQUAL  &kp LBKT         &kp RBKT  &kp BSLH  &kp GRAVE
+&kp LSHFT  &trans    &trans    &trans    &trans     &trans       &kp UNDER  &kp PLUS   &kp LBRC         &kp RBRC  &kp PIPE  &kp TILDE
+                               &kp LGUI  &trans     &kp SPACE    &kp RET    &trans     &kp RALT
             >;
         };
-
 
         extra { status = "reserved"; };
 
