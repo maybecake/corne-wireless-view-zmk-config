@@ -19,18 +19,6 @@
 #define LSYM 2
 #define LCON 3
 #define LMOV 4
-#define QUICK_TAP_MS 215
-
-&sk {
-  release-after-ms = <900>;
-  quick-release;
-};
-
-&lt {
-  flavor = "balanced";
-  tapping-term-ms = <200>;
-  quick-tap-ms = <QUICK_TAP_MS>;
-};
 
 /* Homerow mods */
 
@@ -77,20 +65,20 @@
         win_layer {
             display-name = "Win";
             bindings = <
-&kp ESC       &kp Q  &kp W         &kp E           &kp R               &kp T      &kp Y          &kp U          &kp I         &kp O        &kp P     &kp BSLH
-&kp TAB       &kp A  &hml LALT S   &hml LCTRL D    &hml LSHFT F        &kp G      &kp H          &hmr RSHFT J   &hmr RCTRL K  &hmr RALT L  &kp SEMI  &kp SQT
-&kp LEFT_GUI  &kp Z  &kp X         &kp C           &kp V               &kp B      &kp N          &kp M          &kp COMMA     &kp DOT      &kp FSLH  &none
-                                   &mo LCON        &lt LSYM BACKSPACE  &kp RET    &lt LMOV SPACE &none      &to LMAC
+&kp ESC       &kp Q  &kp W         &kp E           &kp R            &kp T          &kp Y          &kp U          &kp I         &kp O        &kp P     &kp BSLH
+&kp TAB       &kp A  &hml LALT S   &hml LCTRL D    &hml LSHFT F     &kp G          &kp H          &hmr RSHFT J   &hmr RCTRL K  &hmr RALT L  &kp SEMI  &kp SQT
+&kp LEFT_GUI  &kp Z  &kp X         &kp C           &kp V            &kp B          &kp N          &kp M          &kp COMMA     &kp DOT      &kp FSLH  &none
+                                   &mo LCON        &kp BACKSPACE    &lt LSYM RET   &lt LMOV SPACE &none          &to LMAC
             >;
         };
 
         mac_layer {
             display-name = "Mac";
             bindings = <
-&kp ESC       &kp Q  &kp W         &hml LCTRL E  &kp R               &kp T      &kp Y          &kp U          &hmr RCTRL I  &kp O        &kp P     &kp BSLH
-&kp TAB       &kp A  &hml LALT S   &hml LCMD D   &hml LSHFT F        &kp G      &kp H          &hmr RSHFT J   &hmr RCMD K   &hmr RALT L  &kp SEMI  &kp SQT
-&kp LEFT_GUI  &kp Z  &kp X         &kp C         &kp V               &kp B      &kp N          &kp M          &kp COMMA     &kp DOT      &kp FSLH  &none
-                                   &mo LCON      &lt LSYM BACKSPACE  &kp RET    &lt LMOV RET   &kp SPACE      &to LWIN
+&kp ESC       &kp Q  &kp W         &hml LCTRL E  &kp R              &kp T         &kp Y           &kp U          &hmr RCTRL I  &kp O        &kp P     &kp BSLH
+&kp TAB       &kp A  &hml LALT S   &hml LCMD D   &hml LSHFT F       &kp G         &kp H           &hmr RSHFT J   &hmr RCMD K   &hmr RALT L  &kp SEMI  &kp SQT
+&kp LEFT_GUI  &kp Z  &kp X         &kp C         &kp V              &kp B         &kp N           &kp M          &kp COMMA     &kp DOT      &kp FSLH  &none
+                                   &mo LCON      &kp BACKSPACE      &lt LSYM RET  &lt LMOV SPACE  &trans         &to LWIN
             >;
         };
 
