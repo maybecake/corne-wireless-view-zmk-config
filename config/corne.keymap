@@ -19,6 +19,7 @@
 #define LSYM 2
 #define LCON 3
 #define LMOV 4
+#define LGAM 5
 
 /* Homerow mods */
 
@@ -68,7 +69,7 @@
 &kp ESC       &kp Q  &kp W         &kp E           &kp R            &kp T          &kp Y          &kp U          &kp I         &kp O        &kp P     &kp BSLH
 &kp TAB       &kp A  &hml LALT S   &hml LCTRL D    &hml LSHFT F     &kp G          &kp H          &hmr RSHFT J   &hmr RCTRL K  &hmr RALT L  &kp SEMI  &kp SQT
 &kp LEFT_GUI  &kp Z  &kp X         &kp C           &kp V            &kp B          &kp N          &kp M          &kp COMMA     &kp DOT      &kp FSLH  &none
-                                   &mo LCON        &kp BACKSPACE    &lt LSYM RET   &lt LMOV SPACE &none          &to LMAC
+                                   &mo LCON        &kp BACKSPACE    &lt LSYM RET   &lt LMOV SPACE &to LGAM       &to LMAC
             >;
         };
 
@@ -102,13 +103,23 @@
             >;
         };
 
-        raise_layer {
+        move_layer {
             display-name = "Mov";
             bindings = <
-&trans  &trans  &kp HOME  &kp UP    &kp END    &kp PG_UP   &trans  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp BSPC
-&trans  &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &kp PG_DN   &trans  &kp EQUAL  &kp LBKT         &kp RBKT  &kp BSLH  &kp GRAVE
-&trans  &trans  &trans    &trans    &trans     &trans      &trans  &kp PLUS   &kp LBRC         &kp RBRC  &kp PIPE  &kp TILDE
-                          &trans    &trans     &trans      &trans      &trans     &trans     &trans
+&trans  &trans  &kp HOME  &kp UP    &kp END    &kp PG_UP   &trans   &trans      &trans     &trans   &trans      &trans
+&trans  &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &kp PG_DN   &trans   &trans      &trans     &trans   &trans      &trans
+&trans  &trans  &trans    &trans    &trans     &trans      &trans   &trans      &trans     &trans   &trans      &bootloader
+                                    &trans     &trans      &trans   &trans      &trans     &trans
+            >;
+        };
+
+        game_layer {
+            display-name = "Game";
+            bindings = <
+&kp ESC   &kp N1  &kp Q  &kp W  &kp E  &kp R      &trans  &trans  &trans  &trans   &trans  &trans
+&kp TAB   &kp N2  &kp A  &kp S  &kp D  &kp F      &trans  &trans  &trans  &trans   &trans  &trans
+&kp LSHFT &kp N3  &kp Z  &kp X  &kp C  &kp V      &trans  &trans  &trans  &trans   &trans  &trans
+                         &kp M  &kp I  &kp SPACE  &trans  &trans  &to LWIN
             >;
         };
     };
