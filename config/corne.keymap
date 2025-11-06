@@ -15,8 +15,10 @@
 
 /* Global defaults */
 #define LWIN 0
-#define LSYM 1
-#define LMOV 2
+#define LMAC 1
+#define LSYM 2
+#define LCON 3
+#define LMOV 4
 #define QUICK_TAP_MS 215
 
 &sk {
@@ -40,14 +42,32 @@
   #define THUMBS LH2 LH1 LH0 RH0 RH1 RH2 // Thumbs on 36+ keys.
 #endif
 
-#define MAKE_HRM(NAME, HOLD, TAP, TRIGGER_POS)                                 \
-  ZMK_HOLD_TAP(NAME, bindings = <HOLD>, <TAP>; flavor = "balanced";            \
-               tapping-term-ms = <280>; quick-tap-ms = <QUICK_TAP_MS>;         \
-               require-prior-idle-ms = <150>; hold-trigger-on-release;         \
-               hold-trigger-key-positions = <TRIGGER_POS>;)
-
-MAKE_HRM(hml, &kp, &kp, KEYS_R THUMBS) // Left-hand HRMs.
-MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS) // Right-hand HRMs.
+/ {
+    behaviors {
+        hml: home_row_mod_left {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            require-prior-idle-ms = <150>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <KEYS_L THUMBS>; // List of keys on the right side of the keyboard
+            hold-trigger-on-release;
+        };
+        hmr: home_row_mod_right {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            require-prior-idle-ms = <150>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <KEYS_R THUMBS>; // List of keys on the left side of the keyboard
+            hold-trigger-on-release;
+        };
+    };
+};
 
 // Hack: Make HRM combos tap-only (cf, ZMK issue #544).
 #define ZMK_COMBO_8(NAME, TAP, POS, LAYERS, COMBO_MS, IDLE_MS, HOLD, SIDE)     \
@@ -58,40 +78,53 @@ MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS) // Right-hand HRMs.
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
+        win_layer {
             display-name = "Win";
             bindings = <
-&kp ESC       &kp Q  &kp W         &kp E           &kp R                &kp T      &kp Y          &kp U           &kp I         &kp O        &kp P     &kp BACKSLASH
-&kp TAB       &kp A  &hml LALT S   &hml LCTRL D    &hml LSHIFT F        &kp G      &kp H          &hmr RSHIFT J   &hmr RCTRL K  &hmr RALT L  &kp SEMI  &kp SQT
-&kp LEFT_GUI  &kp Z  &kp X         &kp C           &kp V                &kp B      &kp N          &kp M           &kp COMMA     &kp DOT      &kp FSLH  &kp VERS 
-                                   &kp VERS        &lt LSYM BACKSPACE   &kp RET    &lt LMOV RET   &kp SPACE       &none
+&kp ESC       &kp Q  &kp W         &kp E           &kp R               &kp T      &kp Y          &kp U          &kp I         &kp O        &kp P     &kp BSLH
+&kp TAB       &kp A  &hml LALT S   &hml LCTRL D    &hml LSHFT F        &kp G      &kp H          &hmr RSHFT J   &hmr RCTRL K  &hmr RALT L  &kp SEMI  &kp SQT
+&kp LEFT_GUI  &kp Z  &kp X         &kp C           &kp V               &kp B      &kp N          &kp M          &kp COMMA     &kp DOT      &kp FSLH  &none
+                                   &mo LCON        &lt LSYM BACKSPACE  &kp RET    &lt LMOV RET   &kp SPACE      &to LMAC
+            >;
+        };
+
+        mac_layer {
+            display-name = "Mac";
+            bindings = <
+&kp ESC       &kp Q  &kp W         &hml LCTRL E  &kp R               &kp T      &kp Y          &kp U          &hmr RCTRL I  &kp O        &kp P     &kp BSLH
+&kp TAB       &kp A  &hml LALT S   &hml LCMD D   &hml LSHFT F        &kp G      &kp H          &hmr RSHFT J   &hmr RCMD K   &hmr RALT L  &kp SEMI  &kp SQT
+&kp LEFT_GUI  &kp Z  &kp X         &kp C         &kp V               &kp B      &kp N          &kp M          &kp COMMA     &kp DOT      &kp FSLH  &none
+                                   &mo LCON      &lt LSYM BACKSPACE  &kp RET    &lt LMOV RET   &kp SPACE      &to LWIN
             >;
         };
 
         symbols_layer {
             display-name = "Sym";
             bindings = <
-&kp TAB     &kp TILDE    &kp AT      &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp EXCLAMATION  &kp STAR   &kp N7      &kp N8     &kp N9   &none          &trans
-&bt BT_CLR  &kp POUND    &kp DOLLAR  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp AMPERSAND    &kp PLUS   &kp N4      &kp N5     &kp N6   &kp EQUAL      &trans
-&kp LSHFT   &kp PERCENT  &kp CARET   &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp PIPE         &kp MINUS  &kp N1      &kp N2     &kp N3   &kp SLASH      &trans
-                                     &trans                &trans                 &kp UNDERSCORE   &kp N0     &kp PERIOD
+&trans  &kp TILDE    &kp AT      &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp EXCLAMATION  &kp STAR         &kp N7   &kp N8     &kp N9  &none      &trans
+&trans  &kp POUND    &kp DOLLAR  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp AMPERSAND    &kp PLUS         &kp N4   &kp N5     &kp N6  &kp EQUAL  &trans
+&trans  &kp PERCENT  &kp CARET   &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp PIPE         &kp MINUS        &kp N1   &kp N2     &kp N3  &kp SLASH  &trans
+                                 &trans                &trans                 &trans           &kp UNDERSCORE   &kp N0   &kp PERIOD
             >;
         };
 
-//
-//
-//&kp TAB     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5          &trans    &kp N7      &kp N8     &kp N9   &trans   &trans
-// &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans    &kp N4      &kp N5     &kp N6   &trans   &trans
-// &kp LSHFT   &trans        &trans        &trans        &trans        &trans          &trans    &kp N1      &kp N2     &kp N3   &trans   &trans
-//                                         &trans        &trans        &kp UNDERSCORE  &kp N0    &kp PERIOD
+        connect_layer {
+            display-name = "Conn";
+            bindings = <
+&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &trans   &trans      &trans     &trans   &trans      &trans
+&trans      &trans        &trans        &trans        &trans        &trans        &trans   &trans      &trans     &trans   &trans      &trans
+&bootloader &trans        &trans        &trans        &trans        &trans        &trans   &trans      &trans     &trans   &trans      &bootloader
+                                        &trans        &trans        &trans        &trans   &trans      &trans
+            >;
+        };
 
         raise_layer {
             display-name = "Mov";
             bindings = <
-&kp TAB    &kp EXCL  &kp AT    &kp UP    &kp DLLR   &kp PRCNT   &kp CARET  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp BSPC
-&kp LCTRL  &trans    &kp LEFT  &kp DOWN  &kp RIGHT  &trans      &kp MINUS  &kp EQUAL  &kp LBKT         &kp RBKT  &kp BSLH  &kp GRAVE
-&kp LSHFT  &trans    &trans    &trans    &trans     &trans      &kp UNDER  &kp PLUS   &kp LBRC         &kp RBRC  &kp PIPE  &kp TILDE
-                               &trans    &trans     &trans      &trans     &trans     &trans
+&trans  &trans  &kp HOME  &kp UP    &kp END    &kp PG_UP   &trans  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &kp BSPC
+&trans  &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &kp PG_DN   &trans  &kp EQUAL  &kp LBKT         &kp RBKT  &kp BSLH  &kp GRAVE
+&trans  &trans  &trans    &trans    &trans     &trans      &trans  &kp PLUS   &kp LBRC         &kp RBRC  &kp PIPE  &kp TILDE
+                          &trans    &trans     &trans      &trans      &trans     &trans     &trans
             >;
         };
     };
