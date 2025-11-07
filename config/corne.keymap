@@ -57,9 +57,16 @@
         };
         gam: tap_dance_0 {
             compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&none>, <&to LGAM>;
         };
+        cap_t: tap_dance_ct {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp T>, <&caps_word>;
+        }
     };
 };
 
@@ -71,7 +78,7 @@
         win_layer {
             display-name = "Win";
             bindings = <
-&kp ESC       &kp Q  &kp W         &kp E           &kp R            &kp T          &kp Y          &kp U          &kp I         &kp O        &kp P     &kp BSLH
+&kp ESC       &kp Q  &kp W         &kp E           &kp R            &cap_t          &kp Y          &kp U          &kp I         &kp O        &kp P     &kp BSLH
 &kp TAB       &kp A  &hml LALT S   &hml LCTRL D    &hml LSHFT F     &kp G          &kp H          &hmr RSHFT J   &hmr RCTRL K  &hmr RALT L  &kp SEMI  &kp SQT
 &kp LEFT_GUI  &kp Z  &kp X         &kp C           &kp V            &kp B          &kp N          &kp M          &kp COMMA     &kp DOT      &kp FSLH  &none
                                    &mo LCON        &kp BACKSPACE    &lt LSYM RET   &lt LMOV SPACE &gam           &to LMAC
