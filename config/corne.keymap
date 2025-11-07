@@ -55,6 +55,11 @@
             hold-trigger-key-positions = <KEYS_R THUMBS>; // List of keys on the left side of the keyboard
             hold-trigger-on-release;
         };
+        gam: tap_dance_0 {
+            compatible = "zmk,behavior-tap-dance";
+            tapping-term-ms = <200>;
+            bindings = <&none>, <&to LGAM>;
+        };
     };
 };
 
@@ -69,7 +74,7 @@
 &kp ESC       &kp Q  &kp W         &kp E           &kp R            &kp T          &kp Y          &kp U          &kp I         &kp O        &kp P     &kp BSLH
 &kp TAB       &kp A  &hml LALT S   &hml LCTRL D    &hml LSHFT F     &kp G          &kp H          &hmr RSHFT J   &hmr RCTRL K  &hmr RALT L  &kp SEMI  &kp SQT
 &kp LEFT_GUI  &kp Z  &kp X         &kp C           &kp V            &kp B          &kp N          &kp M          &kp COMMA     &kp DOT      &kp FSLH  &none
-                                   &mo LCON        &kp BACKSPACE    &lt LSYM RET   &lt LMOV SPACE &to LGAM       &to LMAC
+                                   &mo LCON        &kp BACKSPACE    &lt LSYM RET   &lt LMOV SPACE &gam           &to LMAC
             >;
         };
 
