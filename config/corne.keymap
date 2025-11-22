@@ -61,7 +61,7 @@
         cap: tap_dance_cap {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <120>;
             bindings = <&kp DEL>, <&caps_word>;
         };
     };
