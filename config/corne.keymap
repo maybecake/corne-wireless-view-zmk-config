@@ -14,8 +14,8 @@
 #define VERS E
 
 /* Global defaults */
-#define LAWIN 0
-#define LMAC 1
+#define LMAC 0
+#define LAWIN 1
 #define LSYM 2
 #define LCON 3
 #define LMOV 4
@@ -56,7 +56,7 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <280>;
-            bindings = <&none>, <&to LAWIN>, <&to LMAC>, <&to LGAM>;
+            bindings = <&none>, <&to LMAC>, <&to LAWIN>, <&to LGAM>;
         };
         cap: tap_dance_cap {
             compatible = "zmk,behavior-tap-dance";
@@ -64,11 +64,17 @@
             tapping-term-ms = <160>;
             bindings = <&kp DEL>, <&caps_word>;
         };
-        dtap: tap_dance_dtap {
+        lockmac: tap_dance_lockmac {
             compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <1>;
+            #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&none>, <&kp>;
+            bindings = <&none>, <&kp LC(LG(Q))>;
+        };
+        lockwin: tap_dance_lockwin {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&none>, <&kp LC(L)>;
         };
     };
 };
@@ -78,23 +84,23 @@
     keymap {
         compatible = "zmk,keymap";
 
-        win_layer {
-            display-name = "Win";
-            bindings = <
-&kp ESC       &kp Q  &kp W        &hml LCTRL E  &kp R          &kp T          &kp Y          &kp U         &hmr RCTRL I  &kp O        &kp P     &kp BSLH
-&kp TAB       &kp A  &hml LALT S  &hml LCTRL D  &hml LSHFT F   &kp G          &kp H          &hmr RSHFT J  &hmr RCTRL K  &hmr RALT L  &kp SEMI  &kp SQT
-&kp LEFT_GUI  &kp Z  &kp X        &kp C         &kp V          &kp B          &kp N          &kp M         &kp COMMA     &kp DOT      &kp FSLH  &dtap LG(L)
-                                  &mo LCON      &kp BACKSPACE  &lt LSYM RET   &lt LMOV SPACE &cap          &lay
-            >;
-        };
-
         mac_layer {
             display-name = "Mac";
             bindings = <
 &kp ESC       &kp Q  &kp W        &hml LCTRL E  &kp R          &kp T         &kp Y           &kp U         &hmr RCTRL I  &kp O        &kp P     &kp BSLH
 &kp TAB       &kp A  &hml LALT S  &hml LCMD D   &hml LSHFT F   &kp G         &kp H           &hmr RSHFT J  &hmr RCMD K   &hmr RALT L  &kp SEMI  &kp SQT
-&kp LEFT_GUI  &kp Z  &kp X        &kp C         &kp V          &kp B         &kp N           &kp M         &kp COMMA     &kp DOT      &kp FSLH  &dtap LC(LG(Q))
+&kp LEFT_GUI  &kp Z  &kp X        &kp C         &kp V          &kp B         &kp N           &kp M         &kp COMMA     &kp DOT      &kp FSLH  &lockmac
                                   &mo LCON      &kp BACKSPACE  &lt LSYM RET  &lt LMOV SPACE  &cap          &lay
+            >;
+        };
+
+        win_layer {
+            display-name = "Win";
+            bindings = <
+&kp ESC       &kp Q  &kp W        &hml LCTRL E  &kp R          &kp T          &kp Y          &kp U         &hmr RCTRL I  &kp O        &kp P     &kp BSLH
+&kp TAB       &kp A  &hml LALT S  &hml LCTRL D  &hml LSHFT F   &kp G          &kp H          &hmr RSHFT J  &hmr RCTRL K  &hmr RALT L  &kp SEMI  &kp SQT
+&kp LEFT_GUI  &kp Z  &kp X        &kp C         &kp V          &kp B          &kp N          &kp M         &kp COMMA     &kp DOT      &kp FSLH  &lockwin
+                                  &mo LCON      &kp BACKSPACE  &lt LSYM RET   &lt LMOV SPACE &cap          &lay
             >;
         };
 
