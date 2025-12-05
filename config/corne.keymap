@@ -64,6 +64,12 @@
             tapping-term-ms = <160>;
             bindings = <&kp DEL>, <&caps_word>;
         };
+        dt: tap_dance_dt {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <1>;
+            tapping-term-ms = <200>;
+            bindings = <&none>, <&kp>
+        }
     };
 };
 
@@ -77,7 +83,7 @@
             bindings = <
 &kp ESC       &kp Q  &kp W        &hml LCTRL E  &kp R          &kp T          &kp Y          &kp U         &hmr RCTRL I  &kp O        &kp P     &kp BSLH
 &kp TAB       &kp A  &hml LALT S  &hml LCTRL D  &hml LSHFT F   &kp G          &kp H          &hmr RSHFT J  &hmr RCTRL K  &hmr RALT L  &kp SEMI  &kp SQT
-&kp LEFT_GUI  &kp Z  &kp X        &kp C         &kp V          &kp B          &kp N          &kp M         &kp COMMA     &kp DOT      &kp FSLH  &kp LG(L)
+&kp LEFT_GUI  &kp Z  &kp X        &kp C         &kp V          &kp B          &kp N          &kp M         &kp COMMA     &kp DOT      &kp FSLH  &dt LG(L)
                                   &mo LCON      &kp BACKSPACE  &lt LSYM RET   &lt LMOV SPACE &cap          &lay
             >;
         };
@@ -87,7 +93,7 @@
             bindings = <
 &kp ESC       &kp Q  &kp W        &hml LCTRL E  &kp R          &kp T         &kp Y           &kp U         &hmr RCTRL I  &kp O        &kp P     &kp BSLH
 &kp TAB       &kp A  &hml LALT S  &hml LCMD D   &hml LSHFT F   &kp G         &kp H           &hmr RSHFT J  &hmr RCMD K   &hmr RALT L  &kp SEMI  &kp SQT
-&kp LEFT_GUI  &kp Z  &kp X        &kp C         &kp V          &kp B         &kp N           &kp M         &kp COMMA     &kp DOT      &kp FSLH  &kp LC(LG(Q))
+&kp LEFT_GUI  &kp Z  &kp X        &kp C         &kp V          &kp B         &kp N           &kp M         &kp COMMA     &kp DOT      &kp FSLH  &dt LC(LG(Q))
                                   &mo LCON      &kp BACKSPACE  &lt LSYM RET  &lt LMOV SPACE  &cap          &lay
             >;
         };
